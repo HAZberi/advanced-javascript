@@ -45,3 +45,36 @@ console.log(User.prototype.hasOwnProperty('calculateAge'));
 console.log(User.prototype.hasOwnProperty('userType'));
 console.log(saif.hasOwnProperty('userType'));
 console.log(hassaan.hasOwnProperty('userType'));
+
+//checking prototype of object end of the prototype chain
+console.log(hassaan.__proto__.__proto__);
+console.log(hassaan.__proto__.__proto__.__proto__);
+
+//check constructor
+console.log(hassaan.__proto__.constructor);
+console.dir(hassaan.__proto__.constructor);
+
+//array prototype
+
+const arr = [3,6,6,9,9,12,15,15,15,18];
+
+console.log(arr.__proto__);
+console.log(Array.prototype);
+console.log(arr.prototype === Array.prototype);
+console.log(arr.__proto__.__proto__);
+
+//advanced prototype and methods
+//create a unique function for arrays
+Array.prototype.unique = function(){
+  //unique === sets
+  //this === array thats calling unique
+  //create a new set object with arr
+  //return array using spread operator
+  return [...new Set(this)];
+}
+console.log(arr.unique());
+
+//checking DOM prototype chain
+const h1 = document.querySelector('h1');
+console.dir(h1);
+
