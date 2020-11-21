@@ -40,7 +40,6 @@ const getCountryInfo = function (country) {
     .then(([data]) => {
       displayCountries(data);
       const neighbour = data.borders[0];
-      console.log(data.borders.length);
       if (!(data.borders.length > 1))
         throw new Error(
           `${country[0].toUpperCase()}${country.slice(1)} has NO neighbours!!`
