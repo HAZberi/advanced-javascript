@@ -32,7 +32,6 @@ const getCountryInfo = function (country) {
   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
     .then(response => response.json())
     .then(([data]) => {
-      displayCountries(data);
       const neighbour = data.borders[0];
       //then method always return the promises so always return from last then()
       return fetch(`https://restcountries.eu/rest/v2/alpha/${neighbour}`);
@@ -58,3 +57,8 @@ const getCountryInfo = function (country) {
     });
 };
 getCountryInfo('brazil');
+
+///////////////////////My Understanding of chaining and the challenge////
+
+//Chaining promises mean that we have to return a fetch funtion from then()
+//The challenge doesn't require long chaining so i used a loop as a callback
