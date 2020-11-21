@@ -23,10 +23,15 @@ const displayCountries = function (data, className = '') {
         </article>
         `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
 };
 
 //////////////////////Shorter ES6 Syntax /////////////////////////////
+const handlErr = function (err) {
+  countriesContainer.insertAdjacentText(
+    'beforeend',
+    `Something went wrong. ${err.message} Shitt Mannn 😲😲😲`
+  );
+};
 
 const getCountryInfo = function (country) {
   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
@@ -40,7 +45,11 @@ const getCountryInfo = function (country) {
     .then(response => response.json())
     .then(data => {
       displayCountries(data, 'neighbour');
+    })
+    .catch(err => handlErr(err))
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
     });
 };
 
-btn.addEventListener('click', e => getCountryInfo('pakistan'));
+btn.addEventListener('click', e => getCountryInfo('paktan'));
