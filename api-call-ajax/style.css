@@ -23,13 +23,13 @@ body {
 .container {
   display: flex;
   flex-flow: column;
-  align-items: center;
+  align-items: flex-start;
+  overflow-x: scroll;
 }
 
 .countries {
   /* margin-bottom: 8rem; */
   display: flex;
-
   font-size: 2rem;
   opacity: 0;
   transition: opacity 1s;
@@ -42,7 +42,7 @@ body {
   width: 30rem;
   border-radius: 0.7rem;
   margin: 0 3rem;
-  /* overflow: hidden; */
+  /* overflow: scroll;  */
 }
 
 .neighbour::before {
