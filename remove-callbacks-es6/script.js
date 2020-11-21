@@ -56,7 +56,7 @@ const getCountryInfo = function (country) {
       );
     });
 };
-getCountryInfo('brazil');
+getCountryInfo('russia');
 
 ///////////////////////My Understanding of chaining and the challenge////
 

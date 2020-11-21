@@ -25,12 +25,10 @@ const displayCountries = function (data, className = '') {
   countriesContainer.insertAdjacentHTML('beforeend', html);
 };
 
+//Step 1
 //////////////////////Shorter ES6 Syntax /////////////////////////////
-const handlErr = function (err) {
-  countriesContainer.insertAdjacentText(
-    'beforeend',
-    `Something went wrong. ${err.message} Shitt Mannn 😲😲😲`
-  );
+/* const handlErr = function (err) {
+    return `Something went wrong. ${err.message} Shitt Mannn 😲😲😲`
 };
 
 const getCountryInfo = function (country) {
@@ -46,10 +44,52 @@ const getCountryInfo = function (country) {
     .then(data => {
       displayCountries(data, 'neighbour');
     })
-    .catch(err => handlErr(err))
+    .catch(err => countriesContainer.insertAdjacentText('afterbegin', handlErr(err)))
     .finally(() => {
       countriesContainer.style.opacity = 1;
     });
 };
 
-btn.addEventListener('click', e => getCountryInfo('paktan'));
+btn.addEventListener('click', e => getCountryInfo('pakistan')); */
+
+//////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+//Step 2
+const handlErr = function (err) {
+  console.log(err);
+  return `Something went wrong. ${err.message} Shitt Mannn 😲😲😲`;
+};
+
+const getCountryInfo = function (country) {
+  fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+    .then(response => {
+      if (!response.ok)
+        throw new Error(
+          `|${country}| NOT FOUND ${response.status}`
+        );
+      return response.json();
+    })
+    .then(([data]) => {
+      displayCountries(data);
+      const neighbour = data.borders[0];
+      //then method always return the promises so always return from last then()
+      return fetch(`https://restcountries.eu/rest/v2/alpha/${neighbour}`);
+    })
+    .then(response => {
+      if (!response.ok)
+      throw new Error(
+        `|${country}| NOT FOUND ${response.status}`
+      );    
+      return response.json()
+    })
+    .then(data => {
+      displayCountries(data, 'neighbour');
+    })
+    .catch(err =>
+      countriesContainer.insertAdjacentText('beforeend', handlErr(err))
+    )
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+btn.addEventListener('click', e => getCountryInfo('pakistanlm'));
