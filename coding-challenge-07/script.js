@@ -28,9 +28,23 @@ const handlErr = function (err) {
   return `Something went wrong. ${err.message} Shitt Mannn 😲😲😲`;
 };
 
+//Promisifying Geolocation API and plug real-time device coordinates
 
-const whereAmI = function (lattitude, longitude) {
-  fetch(`https://geocode.xyz/${lattitude},${longitude}?geoit=json`)
+const getPosition = function () {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+//Plugging real coordinates
+
+const whereAmI = function () {
+  getPosition()
+    .then(pos => {
+      const { latitude, longitude } = pos.coords;
+      console.log(latitude, longitude);
+      return fetch(`https://geocode.xyz/${latitude},${longitude}?geoit=json`);
+    })
     .then(response => {
       if (!response.ok)
         throw new Error(
@@ -53,6 +67,6 @@ const whereAmI = function (lattitude, longitude) {
     .finally(() => (countriesContainer.style.opacity = 1));
 };
 
-btn.addEventListener('click', e => whereAmI(52.508,13.405));
+btn.addEventListener('click', e => whereAmI());
 
 //challenge completed but can be made better
