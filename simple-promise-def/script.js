@@ -42,3 +42,5 @@ wait(1)
 
   Promise.resolve('abc').then(res => console.log(res));
   Promise.reject(new Error('abc')).catch(err => console.log(err));
+
+
