@@ -44,22 +44,38 @@ let image;
   })
   .catch(err => console.error(err)); */
 
-  const loadNPause = async function(){
-    try{
-      let imgElement = await createImage('./img/img-1.jpg')
-      document.body.append(imgElement);
-      imgElement.classList.add('images');
-      await wait(2);
-      imgElement.style.display = 'none';
-      await wait(2);
-      imgElement = await createImage('./img/img-2.jpg')
-      document.body.append(imgElement);
-      imgElement.classList.add('images');
-      await wait(2);
-      imgElement.style.display = 'none';
-    }catch (err){
-      console.error(`Something went wrong : ${err.message}`);
-    }
-  };
+const loadNPause = async function () {
+  try {
+    let imgElement = await createImage('./img/img-1.jpg');
+    document.body.append(imgElement);
+    imgElement.classList.add('images');
+    await wait(2);
+    imgElement.style.display = 'none';
+    await wait(2);
+    imgElement = await createImage('./img/img-2.jpg');
+    document.body.append(imgElement);
+    imgElement.classList.add('images');
+    await wait(2);
+    imgElement.style.display = 'none';
+  } catch (err) {
+    console.error(`Something went wrong : ${err.message}`);
+  }
+};
+//loadNPause();
+const theDiv = document.querySelector('.images');
 
-  loadNPause();
+const loadAll = async function (imgArr) {
+  try {
+    const imgs = imgArr.map(img => createImage(img));
+    console.log(imgs);
+    const imgsEls = await Promise.all(imgs);
+    imgsEls.forEach(img => {
+      theDiv.append(img);
+      img.classList.add('parallel');
+    });
+  } catch (err) {
+    console.error(`Something went wrong : ${err.message}`);
+  }
+};
+
+loadAll(['./img/img-1.jpg', './img/img-2.jpg', './img/img-3.jpg']);
