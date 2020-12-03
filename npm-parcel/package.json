@@ -4,12 +4,17 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "author": "Hassaan Zuberi",
   "license": "ISC",
   "dependencies": {
     "leaflet": "^1.7.1",
-    "lodash-es": "^4.17.15"
+    "lodash-es": "^4.17.15",
+    "regenerator-runtime": "^0.13.7"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.4"
   }
 }
