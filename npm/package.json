@@ -1,0 +1,15 @@
+{
+  "name": "my-first-local-npm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hassaan Zuberi",
+  "license": "ISC",
+  "dependencies": {
+    "leaflet": "^1.7.1",
+    "lodash-es": "^4.17.15"
+  }
+}
